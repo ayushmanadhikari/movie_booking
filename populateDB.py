@@ -1,7 +1,7 @@
 #establishing a database connection
-from django.db import connection
 from mysql.connector import connect, Error, cursor
-
+from faker import Faker
+import random
 
 CONS_HOST = "localhost"
 CONS_USER = "root"
@@ -15,7 +15,7 @@ try:
         user=CONS_USER,
         password=CONS_PASS,
     ) 
-    print(mydb)
+    print("connection established!!!")
 except Error as e:
     print(e)
 
@@ -30,8 +30,38 @@ myCursor.execute(select_db_query)
 myCursor.execute(show_table_query)
 myResult = myCursor.fetchall()
 
-for x in myResult:
-    print(x)
+#user table
+id_range = range(1, 50)
+#popultaing user table
+def generate_user_data():
+    i = 0
+    while i < 10:
+        fake = Faker()
+        u_id = random.choice(id_range)
+        u_name = fake.name()
+        email = fake.email()
+        location = fake.address()
+        user_insert_query = f"INSERT INTO user (u_id, u_name, email, location) VALUES ({u_id}, '{u_name}', '{email}', '{location}');"
+        try: 
+            myCursor.execute(user_insert_query)
+            mydb.commit()
+        except Error as e:
+            print(e)
+        i += 10
+
+
+def generate_movie_data():
+    
+
+    return 1
+
+
+
+generate_user_data()
+
+#for x in myResult:
+#    print(x)
+
 
 
 
