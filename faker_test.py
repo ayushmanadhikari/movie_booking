@@ -12,4 +12,5 @@ def generate_data():
     id = random.choice(id_list)
     print(id,u_name, email, location)
 
-generate_data()
+m_name = "heman" * 5
+print(m_name)
