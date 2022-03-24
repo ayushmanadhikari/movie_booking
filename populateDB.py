@@ -77,7 +77,6 @@ def generate_show_data():
     return 1
 
 
-generate_movie_data()
 
 
 
