@@ -1,13 +1,20 @@
 from datetime import datetime
-from pyexpat import model
 from django.db import models
 
-# Create your models here.
+
+
+class movie(models.Model):
+    m_id = models.AutoField(primary_key=True)
+    m_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.m_name
+
 
 
 class Shows(models.Model):
-    s_id = models.AutoField(primary_key=True, default=1)
-    m_id = models.IntegerField()
+    s_id = models.AutoField(primary_key=True)
+    m_id = models.ForeignKey(movie, on_delete=models.CASCADE)
     price = models.IntegerField()
     capacity = models.BooleanField(default=True)
 
@@ -17,7 +24,7 @@ class Shows(models.Model):
 
 
 class Booked(models.Model):
-    b_id = models.AutoField(primary_key=True, default=1001)
+    b_id = models.AutoField(primary_key=True)
     s_id = models.ForeignKey(Shows, on_delete=models.CASCADE)
     b_time = models.DateTimeField(default=datetime.now, blank=True)
 
