@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from . models import Shows
+from . models import Booked, Shows
 from rest_framework import viewsets
-from .serializers import showsSerializer, UserSerializer
-from django.contrib.auth.models import User
+from .serializers import showsSerializer, bookedSerializer
 
 
 
@@ -11,7 +10,9 @@ class ShowViewset(viewsets.ModelViewSet):
     serializer_class = showsSerializer
 
 
-class userViewset(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class BookedViewset(viewsets.ModelViewSet):
+    queryset = Booked.objects.all()
+    serializer_class = bookedSerializer
+
+
 
